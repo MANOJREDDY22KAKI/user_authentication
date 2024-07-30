@@ -47,6 +47,9 @@ const LoginUser = async (request,response) =>{
         const exist = await user.findOne({email})
         if(!exist){
             return response.status(400).send("Invalid Credentials")
+
+            //.json({}) => will no throw any error while sending data, it will send json response
+           // return response.status(400).json({ message: 'Invalid credentials' });  ---> use this  instead of the line above to send json response instead of plain text.
         }
 
         const match = await bcrypt.compare(password,exist.password);
